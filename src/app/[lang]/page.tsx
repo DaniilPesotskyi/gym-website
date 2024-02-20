@@ -16,10 +16,21 @@ export default async function Page({ params }: { params: { lang: string } }) {
 
   return (
     <Layout params={params} locales={locales}>
-      <h1>1</h1>
+      <SliceZone slices={page.data.slices} components={components} />
+      <br />
+      <br />
+      <br />
+      <h2>qweqweqwe</h2>
+      <br />
+      <br />
+      <br />
+      <h2>qweqweqwe</h2>
+      <br />
+      <br />
+      <br />
+      <h2>qweqweqwe</h2>
     </Layout>
   );
-  //   return <SliceZone slices={page.data.slices} components={components} />;
 }
 
 export async function generateMetadata({

@@ -17,7 +17,7 @@ export default async function Layout({
   })[];
 }) {
   const client = createClient();
-  const settings = await client.getSingle("settings");
+  const settings = await client.getSingle("settings", { lang });
 
   return (
     <div>

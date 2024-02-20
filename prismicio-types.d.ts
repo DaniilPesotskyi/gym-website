@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = never;
+type HomepageDocumentDataSlicesSlice = HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -129,6 +129,31 @@ export type SettingsDocument<Lang extends string = string> =
 export type AllDocumentTypes = HomepageDocument | SettingsDocument;
 
 /**
+ * Primary content in *Hero → Items*
+ */
+export interface HeroSliceDefaultItem {
+  /**
+   * Heading field in *Hero → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.items[].heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Image field in *Hero → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
  * Default variation for Hero Slice
  *
  * - **API ID**: `default`
@@ -138,7 +163,7 @@ export type AllDocumentTypes = HomepageDocument | SettingsDocument;
 export type HeroSliceDefault = prismic.SharedSliceVariation<
   "default",
   Record<string, never>,
-  never
+  Simplify<HeroSliceDefaultItem>
 >;
 
 /**
@@ -173,6 +198,7 @@ declare module "@prismicio/client" {
       SettingsDocumentDataNavigationItem,
       AllDocumentTypes,
       HeroSlice,
+      HeroSliceDefaultItem,
       HeroSliceVariation,
       HeroSliceDefault,
     };
