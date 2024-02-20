@@ -1,0 +1,71 @@
+:root {
+  --main-bg-clr: linear-gradient(
+    119.1deg,
+    rgb(0, 0, 0) 3.191%,
+    rgb(14, 14, 14) 32.463%,
+    rgb(5, 5, 5) 61.735%
+  );
+
+  --secondary-bg-clr: linear-gradient(
+    134.38deg,
+    rgba(16, 16, 16, 0.5) 13.531%,
+    rgba(18, 18, 18, 0.5) 57.339%,
+    rgba(17, 17, 17, 0.5) 106.86%
+  );
+
+  --main-text-clr: #ffffff;
+  --secondary-text-clr: #646464;
+
+  --primary-bg-clr: linear-gradient(
+    129.45deg,
+    rgb(90, 0, 0) 12.467%,
+    rgb(123, 0, 0) 54.18%,
+    rgba(62, 0, 0, 0.96) 86.806%
+  );
+
+  --border-radius: 15px;
+  --transition-duration: 250ms;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--main-text-clr);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  font-style: normal;
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+}
