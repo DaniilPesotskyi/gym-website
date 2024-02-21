@@ -21,7 +21,7 @@ export default async function Layout({
 
   return (
     <div>
-      <Header settings={settings} />
+      <Header settings={settings} locales={locales} />
       {children}
       <footer></footer>
       <div className={css.background}></div>

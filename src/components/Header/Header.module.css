@@ -21,10 +21,6 @@
   display: none;
 }
 
-.langBtn {
-  display: none;
-}
-
 .menuBtn {
   width: 40px;
   height: 40px;
@@ -104,27 +100,6 @@
 
   .navLink:hover::after {
     opacity: 1;
-  }
-
-  .langBtn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    width: fit-content;
-    margin-left: auto;
-
-    border: 0;
-    background-color: transparent;
-
-    font-size: 17px;
-    color: var(--main-text-clr);
-
-    cursor: pointer;
-  }
-
-  .langIcon {
-    border-radius: 5px;
   }
 
   .menuBtn {

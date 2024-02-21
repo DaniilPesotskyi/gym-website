@@ -1,12 +1,19 @@
+import css from "./Header.module.css";
+
 import { PrismicNextLink } from "@prismicio/next";
 import { SettingsDocument } from "../../../prismicio-types";
-import css from "./Header.module.css";
+import { PrismicDocument } from "@prismicio/client";
+
+import LangChanger from "./LangChanger/LangChanger";
 
 interface IProps {
   settings: SettingsDocument<string>;
+  locales: (PrismicDocument<Record<string, any>, string, string> & {
+    lang_name: string;
+  })[];
 }
 
-const Header: React.FC<IProps> = ({ settings }) => {
+const Header: React.FC<IProps> = ({ settings, locales }) => {
   return (
     <header className={css.header}>
       <LogoIcon className={css.icon} />
@@ -21,10 +28,7 @@ const Header: React.FC<IProps> = ({ settings }) => {
           ))}
         </ul>
       </nav>
-      <button type="button" className={css.langBtn}>
-        <UkraineIcon className={css.langIcon} />
-        Укр
-      </button>
+      <LangChanger locales={locales} />
       <button type="button" className={css.menuBtn}>
         <MenuIcon className={css.icon} />
       </button>
@@ -68,62 +72,6 @@ function MenuIcon({ className }: { className?: string }) {
         strokeWidth="3.333"
         d="M6.667 10h26.666M6.667 20h26.666M6.667 30h26.666"
       ></path>
-    </svg>
-  );
-}
-
-function UkraineIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      width="26"
-      height="20"
-      fill="none"
-    >
-      <mask
-        id="a"
-        width="27"
-        height="20"
-        x="0"
-        y="0"
-        maskUnits="userSpaceOnUse"
-        style={{ maskType: "luminance" }}
-      >
-        <path fill="#fff" d="M0 0h27v20H0z"></path>
-      </mask>
-      <g mask="url(#a)">
-        <path
-          fill="#3195F9"
-          fillRule="evenodd"
-          d="M0 0v20h27V0H0z"
-          clipRule="evenodd"
-        ></path>
-        <mask
-          id="b"
-          width="27"
-          height="20"
-          x="0"
-          y="0"
-          maskUnits="userSpaceOnUse"
-          style={{ maskType: "luminance" }}
-        >
-          <path
-            fill="#fff"
-            fillRule="evenodd"
-            d="M0 0v20h27V0H0z"
-            clipRule="evenodd"
-          ></path>
-        </mask>
-        <g mask="url(#b)">
-          <path
-            fill="#FECA00"
-            fillRule="evenodd"
-            d="M0 10v10h27V10H0z"
-            clipRule="evenodd"
-          ></path>
-        </g>
-      </g>
     </svg>
   );
 }
