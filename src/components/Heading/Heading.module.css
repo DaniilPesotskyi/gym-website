@@ -1,0 +1,36 @@
+.title {
+  margin-bottom: 35px;
+
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--main-text-clr);
+}
+
+.left {
+  margin-right: auto;
+  text-align: left;
+}
+
+.right {
+  margin-left: auto;
+  text-align: right;
+}
+
+.center {
+  max-width: 100%;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .title {
+    margin-bottom: 50px;
+
+    font-size: 48px;
+  }
+}

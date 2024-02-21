@@ -17,18 +17,6 @@ export default async function Page({ params }: { params: { lang: string } }) {
   return (
     <Layout params={params} locales={locales}>
       <SliceZone slices={page.data.slices} components={components} />
-      <br />
-      <br />
-      <br />
-      <h2>qweqweqwe</h2>
-      <br />
-      <br />
-      <br />
-      <h2>qweqweqwe</h2>
-      <br />
-      <br />
-      <br />
-      <h2>qweqweqwe</h2>
     </Layout>
   );
 }

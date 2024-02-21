@@ -1,0 +1,101 @@
+.swiper {
+  margin-bottom: 30px;
+  overflow: visible;
+}
+
+.item {
+  width: 100%;
+  padding: 25px;
+
+  border-radius: var(--border-radius);
+  background: var(--secondary-bg-clr);
+
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--main-text-clr);
+}
+
+.icon {
+  width: 85px;
+  height: 85px;
+  margin-bottom: 25px;
+
+  border-radius: var(--border-radius);
+  background-color: black;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.paginationBtn {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 45px;
+  height: 45px;
+
+  border: 1px solid var(--main-text-clr);
+  border-radius: 99px;
+  background-color: transparent;
+
+  cursor: pointer;
+  transition: all var(--transition-duration);
+}
+
+.paginationBtn:hover {
+  border: 1px solid transparent;
+}
+
+.paginationBtn::after {
+  background: var(--primary-bg-clr);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  border-radius: 99px;
+  opacity: 0;
+  transition: all var(--transition-duration);
+}
+
+.paginationBtn:hover::after {
+  opacity: 1;
+}
+
+.paginationIcon {
+  stroke: var(--main-text-clr);
+}
+
+.paginationBtn:nth-child(1) .paginationIcon {
+  transform: rotate(180deg);
+}
+
+@media screen and (min-width: 480px) {
+  .item {
+    width: 380px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper {
+    margin-bottom: 35px;
+  }
+
+  .item {
+    font-size: 32px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .swiper {
+    margin-bottom: 40px;
+  }
+}
