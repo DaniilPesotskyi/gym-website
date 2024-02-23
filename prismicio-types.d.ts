@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | SubscriptionsSlice
   | TeamSlice
   | ServicesSlice
   | BenefitsSlice
@@ -539,6 +540,106 @@ export type ServicesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Subscriptions → Primary*
+ */
+export interface SubscriptionsSliceDefaultPrimary {
+  /**
+   * Heading field in *Subscriptions → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subscriptions.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Button Label field in *Subscriptions → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subscriptions.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *Subscriptions → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subscriptions.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *Subscriptions → Items*
+ */
+export interface SubscriptionsSliceDefaultItem {
+  /**
+   * Title field in *Subscriptions → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subscriptions.items[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Price field in *Subscriptions → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subscriptions.items[].price
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  price: prismic.KeyTextField;
+
+  /**
+   * Color field in *Subscriptions → Items*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: subscriptions.items[].color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  color: prismic.ColorField;
+}
+
+/**
+ * Default variation for Subscriptions Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SubscriptionsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SubscriptionsSliceDefaultPrimary>,
+  Simplify<SubscriptionsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Subscriptions*
+ */
+type SubscriptionsSliceVariation = SubscriptionsSliceDefault;
+
+/**
+ * Subscriptions Shared Slice
+ *
+ * - **API ID**: `subscriptions`
+ * - **Description**: Subscriptions
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SubscriptionsSlice = prismic.SharedSlice<
+  "subscriptions",
+  SubscriptionsSliceVariation
+>;
+
+/**
  * Primary content in *Team → Primary*
  */
 export interface TeamSliceDefaultPrimary {
@@ -675,6 +776,11 @@ declare module "@prismicio/client" {
       ServicesSliceDefaultItem,
       ServicesSliceVariation,
       ServicesSliceDefault,
+      SubscriptionsSlice,
+      SubscriptionsSliceDefaultPrimary,
+      SubscriptionsSliceDefaultItem,
+      SubscriptionsSliceVariation,
+      SubscriptionsSliceDefault,
       TeamSlice,
       TeamSliceDefaultPrimary,
       TeamSliceDefaultItem,
