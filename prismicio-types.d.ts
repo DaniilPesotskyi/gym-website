@@ -388,6 +388,76 @@ export type BenefitsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Contacts → Primary*
+ */
+export interface ContactsSliceDefaultPrimary {
+  /**
+   * Heading field in *Contacts → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contacts.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Contacts → Items*
+ */
+export interface ContactsSliceDefaultItem {
+  /**
+   * Contact field in *Contacts → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contacts.items[].contact
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contact: prismic.KeyTextField;
+
+  /**
+   * Icon field in *Contacts → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contacts.items[].icon
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icon: prismic.SelectField<"Location" | "Email" | "Number">;
+}
+
+/**
+ * Default variation for Contacts Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContactsSliceDefaultPrimary>,
+  Simplify<ContactsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Contacts*
+ */
+type ContactsSliceVariation = ContactsSliceDefault;
+
+/**
+ * Contacts Shared Slice
+ *
+ * - **API ID**: `contacts`
+ * - **Description**: Contacts
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactsSlice = prismic.SharedSlice<
+  "contacts",
+  ContactsSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Items*
  */
 export interface HeroSliceDefaultItem {
@@ -767,6 +837,11 @@ declare module "@prismicio/client" {
       BenefitsSliceDefaultItem,
       BenefitsSliceVariation,
       BenefitsSliceDefault,
+      ContactsSlice,
+      ContactsSliceDefaultPrimary,
+      ContactsSliceDefaultItem,
+      ContactsSliceVariation,
+      ContactsSliceDefault,
       HeroSlice,
       HeroSliceDefaultItem,
       HeroSliceVariation,
