@@ -1,10 +1,15 @@
+"use client";
+
 import css from "./Header.module.css";
 
 import { PrismicNextLink } from "@prismicio/next";
 import { SettingsDocument } from "../../../prismicio-types";
 import { PrismicDocument } from "@prismicio/client";
 
+import { useEffect, useState } from "react";
+
 import LangChanger from "./LangChanger/LangChanger";
+import clsx from "clsx";
 
 interface IProps {
   settings: SettingsDocument<string>;
@@ -14,8 +19,28 @@ interface IProps {
 }
 
 const Header: React.FC<IProps> = ({ settings, locales }) => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      if (scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header className={css.header}>
+    <header className={clsx(css.header, isScrolled && css.scrolled)}>
       <LogoIcon className={css.icon} />
       <nav className={css.nav}>
         <ul className={css.navList}>
