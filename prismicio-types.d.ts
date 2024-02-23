@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | TeamSlice
   | ServicesSlice
   | BenefitsSlice
   | HeroSlice;
@@ -73,6 +74,125 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 /**
+ * Item in *Member → Socials*
+ */
+export interface MemberDocumentDataSocialsItem {
+  /**
+   * Icon field in *Member → Socials*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.socials[].icon
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icon: prismic.SelectField<"instagram" | "2">;
+
+  /**
+   * Link field in *Member → Socials*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.socials[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+/**
+ * Content for Member documents
+ */
+interface MemberDocumentData {
+  /**
+   * Image field in *Member*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *Member*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  name: prismic.RichTextField;
+
+  /**
+   * Position field in *Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.position
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  position: prismic.KeyTextField;
+
+  /**
+   * Work Experience field in *Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.work_experience
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  work_experience: prismic.KeyTextField;
+
+  /**
+   * Short Description field in *Member*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.short_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  short_description: prismic.RichTextField;
+
+  /**
+   * Description field in *Member*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Socials field in *Member*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: member.socials[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  socials: prismic.GroupField<Simplify<MemberDocumentDataSocialsItem>>;
+}
+
+/**
+ * Member document from Prismic
+ *
+ * - **API ID**: `member`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MemberDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<MemberDocumentData>, "member", Lang>;
+
+/**
  * Item in *Settings → Navigation*
  */
 export interface SettingsDocumentDataNavigationItem {
@@ -129,7 +249,10 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomepageDocument | SettingsDocument;
+export type AllDocumentTypes =
+  | HomepageDocument
+  | MemberDocument
+  | SettingsDocument;
 
 /**
  * Primary content in *Benefits → Primary*
@@ -353,6 +476,106 @@ export type ServicesSlice = prismic.SharedSlice<
   ServicesSliceVariation
 >;
 
+/**
+ * Primary content in *Team → Primary*
+ */
+export interface TeamSliceDefaultPrimary {
+  /**
+   * Heading field in *Team → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Subtitle field in *Team → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * Button Label field in *Team → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *Team → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *Team → Items*
+ */
+export interface TeamSliceDefaultItem {
+  /**
+   * Member field in *Team → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.items[].member
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  member: prismic.ContentRelationshipField<"member">;
+}
+
+/**
+ * Default variation for Team Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamSliceDefaultPrimary>,
+  Simplify<TeamSliceDefaultItem>
+>;
+
+/**
+ * Full Fledged variation for Team Slice
+ *
+ * - **API ID**: `fullFledged`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSliceFullFledged = prismic.SharedSliceVariation<
+  "fullFledged",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Team*
+ */
+type TeamSliceVariation = TeamSliceDefault | TeamSliceFullFledged;
+
+/**
+ * Team Shared Slice
+ *
+ * - **API ID**: `team`
+ * - **Description**: Team
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSlice = prismic.SharedSlice<"team", TeamSliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -366,6 +589,9 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      MemberDocument,
+      MemberDocumentData,
+      MemberDocumentDataSocialsItem,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataNavigationItem,
@@ -384,6 +610,12 @@ declare module "@prismicio/client" {
       ServicesSliceDefaultItem,
       ServicesSliceVariation,
       ServicesSliceDefault,
+      TeamSlice,
+      TeamSliceDefaultPrimary,
+      TeamSliceDefaultItem,
+      TeamSliceVariation,
+      TeamSliceDefault,
+      TeamSliceFullFledged,
     };
   }
 }

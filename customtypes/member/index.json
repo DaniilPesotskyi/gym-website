@@ -1,0 +1,94 @@
+{
+  "format": "custom",
+  "id": "member",
+  "label": "Member",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {
+            "width": 245,
+            "height": 315
+          },
+          "thumbnails": []
+        }
+      },
+      "name": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Name",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "heading3"
+        }
+      },
+      "position": {
+        "type": "Text",
+        "config": {
+          "label": "Position",
+          "placeholder": ""
+        }
+      },
+      "work_experience": {
+        "type": "Text",
+        "config": {
+          "label": "Work Experience",
+          "placeholder": ""
+        }
+      },
+      "short_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Short Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph"
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph"
+        }
+      },
+      "socials": {
+        "type": "Group",
+        "config": {
+          "label": "Socials",
+          "repeat": true,
+          "fields": {
+            "icon": {
+              "type": "Select",
+              "config": {
+                "label": "Icon",
+                "placeholder": "",
+                "options": ["instagram", "2"]
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Link",
+                "placeholder": "",
+                "select": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
