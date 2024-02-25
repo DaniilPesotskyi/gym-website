@@ -7,9 +7,10 @@ import { SettingsDocument } from "../../../prismicio-types";
 import { PrismicDocument } from "@prismicio/client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 import LangChanger from "./LangChanger/LangChanger";
-import clsx from "clsx";
 
 interface IProps {
   settings: SettingsDocument<string>;
@@ -20,6 +21,7 @@ interface IProps {
 
 const Header: React.FC<IProps> = ({ settings, locales }) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const path = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +48,10 @@ const Header: React.FC<IProps> = ({ settings, locales }) => {
         <ul className={css.navList}>
           {settings.data.navigation.map((i, index) => (
             <li key={index}>
-              <PrismicNextLink field={i.link} className={css.navLink}>
+              <PrismicNextLink
+                field={i.link}
+                className={clsx(css.navLink, path === i.link.url && css.active)}
+              >
                 {i.label}
               </PrismicNextLink>
             </li>

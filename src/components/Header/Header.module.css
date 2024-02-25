@@ -112,6 +112,11 @@
     transition: all var(--transition-duration);
   }
 
+  .navLink.active::after {
+    background: var(--primary-bg-clr);
+    opacity: 1;
+  }
+
   .navLink:hover::after {
     opacity: 1;
   }

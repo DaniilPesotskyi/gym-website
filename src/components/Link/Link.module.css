@@ -11,6 +11,8 @@
 }
 
 .iconWrap {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,10 +22,40 @@
 
   border: 1px solid var(--main-text-clr);
   border-radius: 99px;
+
+  transition: all var(--transition-duration);
 }
 
 .icon {
   transform: rotate(45deg);
 
   stroke: var(--main-text-clr);
+}
+
+.iconWrap:hover {
+  border: 1px solid transparent;
+}
+
+.iconWrap::after {
+  background: var(--primary-bg-clr);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  border-radius: 99px;
+  opacity: 0;
+  transition: all var(--transition-duration);
+}
+
+.link:hover .iconWrap::after {
+  opacity: 1;
+}
+
+.link:hover .iconWrap {
+  border: 1px solid transparent;
+
+  transform: rotate(45deg);
 }
