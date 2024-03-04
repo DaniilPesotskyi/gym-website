@@ -8,6 +8,7 @@ import { PrismicNextImage } from "@prismicio/next";
 import Section from "@/components/Section/Section";
 import Heading from "@/components/Heading/Heading";
 import Link from "@/components/Link/Link";
+import Alternative from "./Alternative";
 
 export type TeamProps = SliceComponentProps<Content.TeamSlice>;
 
@@ -21,6 +22,8 @@ const Team = async ({ slice }: TeamProps): Promise<JSX.Element> => {
       }
     })
   );
+
+  const team = await client.getAllByType("member");
   return (
     <>
       {slice.variation === "default" && (
@@ -84,7 +87,9 @@ const Team = async ({ slice }: TeamProps): Promise<JSX.Element> => {
           />
         </Section>
       )}
-      {slice.variation === "fullFledged" && <div></div>}
+      {slice.variation === "fullFledged" && (
+        <Alternative slice={slice} team={team} />
+      )}
     </>
   );
 };

@@ -59,7 +59,13 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "fullFledged",
-		"primary": {},
+		"primary": {
+			"label": {
+				"__TYPE__": "FieldContent",
+				"value": "blanket",
+				"type": "Text"
+			}
+		},
 		"items": [
 			{
 				"__TYPE__": "GroupItemContent",

@@ -307,7 +307,7 @@ interface MemberDocumentData {
 export type MemberDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<MemberDocumentData>, "member", Lang>;
 
-type PageDocumentDataSlicesSlice = HeroSlice;
+type PageDocumentDataSlicesSlice = TeamSlice | HeroSlice;
 
 /**
  * Content for Page documents
@@ -390,7 +390,7 @@ export interface SettingsDocumentDataNavigationItem {
    * - **API ID Path**: settings.navigation[].link
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.FilledLinkToWebField;
+  link: prismic.LinkField;
 }
 
 /**
@@ -1013,6 +1013,21 @@ export type TeamSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Team → Primary*
+ */
+export interface TeamSliceFullFledgedPrimary {
+  /**
+   * label field in *Team → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.primary.label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
  * Full Fledged variation for Team Slice
  *
  * - **API ID**: `fullFledged`
@@ -1021,7 +1036,7 @@ export type TeamSliceDefault = prismic.SharedSliceVariation<
  */
 export type TeamSliceFullFledged = prismic.SharedSliceVariation<
   "fullFledged",
-  Record<string, never>,
+  Simplify<TeamSliceFullFledgedPrimary>,
   never
 >;
 
@@ -1099,6 +1114,7 @@ declare module "@prismicio/client" {
       TeamSlice,
       TeamSliceDefaultPrimary,
       TeamSliceDefaultItem,
+      TeamSliceFullFledgedPrimary,
       TeamSliceVariation,
       TeamSliceDefault,
       TeamSliceFullFledged,

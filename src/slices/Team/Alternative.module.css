@@ -1,0 +1,26 @@
+.section {
+}
+
+.info {
+}
+
+.name {
+}
+
+.subinfo {
+  font-size: 17px;
+  color: var(--secondary-text-clr);
+}
+
+.position {
+}
+
+.experienceWrap {
+}
+
+.timeIcon {
+  stroke: var(--secondary-text-clr);
+}
+
+.experience {
+}
